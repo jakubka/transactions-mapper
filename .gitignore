@@ -104,3 +104,5 @@ ENV/
 # files with transactions
 lloyds.csv
 output.csv
+tsb.csv
+monzo.csv

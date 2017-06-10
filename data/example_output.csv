@@ -1,34 +1,34 @@
 Date	Account	 Amount GBP 	 Amount CZK 	Category	Sub-category	Note	Merchant	Holiday	Business
-13/03/17	Account2	-6 		Groceries			M&S SIMPLY FOOD-SS
-13/03/17	Account2	-52 		Transport	Train		TRAINLINE.COM LTD	Newcastle2017
-13/03/17	Account2	-200 		Internal			Account3
-13/03/17	Account2	-25.123 		Fixed	Internet		VIRGIN MEDIA PYMTS
-13/03/17	Account2	-5 		Shopping			BOOTS 1940
-13/03/17	Account2	-8 		Transport	Uber		UBER GB MAR12 YQBF
-13/03/17	Account2	-1 		EatingOut	Coffee		EST PRESSO 1968
-13/03/17	Account3	-5 		EatingOut	Lunch		Haa		1
-13/03/17	Account3	-13.32 		Shopping			Charity shop
-13/03/17	Account3	-19 		Groceries			M&S SIMPLY FOOD-SS
-13/03/17	Account4	-15 		EatingOut	Drinks		Pub
-13/03/17	Account4	-19 		Sport	OneTime	Squash	Better
-13/03/17	Account5	-263 		Transport	Flight	RYANAIR LTD AIRLINE DUBLIN	RYANAIR WEB GBP	Berlin2017
-13/03/17	Account5	-4 		EatingOut	Breakfast	LE PAIN QUOTIDIEN LONDON	LE PAIN QUOTIDIEN
-13/03/17	Account5	-7 		EatingOut	Coffee	Coffee	coffee
-13/03/17	Account5	-1 		Groceries		TESCO STORES 5912 LONDON	TESCO STORES 5912
-13/03/17	Account5	-7 		EatingOut	Lunch	MODERN JAPANESE LONDON	KMODERN JAPANESE
-13/03/17	Account6	-12 		Fixed	Phone	GIFFGAFF.COM	GIFFGAFF.COM
-13/03/17	Account7	-100 		Internal		MONZO CD 8417 	Account4
-13/03/17	Account7	-100 		Internal		MONZO CD 8417 	Account4
-14/03/17	Account3	-6 		EatingOut	Lunch		Wasabi
-14/03/17	Account4	-40 		EatingOut	Lunch		ATM
-14/03/17	Account5	-4 		Groceries		SAINSBURY'S SPRMRKTS LT LONDON	SAINSBURY'S SPRMRKTS LTD-SACAT LOC-SCO
-14/03/17	Account6	-10 		Fixed	Phone		GIFFGAFF.COM
-14/03/17	Account10		 300 	Other
-15/03/17	Account3	-7 		EatingOut	Lunch		Chozen Noodle
-15/03/17	Account3	-2 		EatingOut	Lunch		Wrapid
-15/03/17	Account3	-5 		Groceries			Sainsbury's
-15/03/17	Account4	-7 		EatingOut	Lunch		ChosenNoodle
-15/03/17	Account5	-80 		Groceries		OCADO HERTFORDSHIRE	OCADO
-15/03/17	Account5	-6 		Transport	TFL	TFL TRAVEL CHARGE TFL.GOV.UK/CP	TFL TRAVEL CHARGE
-16/03/17	Account4	-3 		EatingOut	Drinks		BigChillHouse
-16/03/17	Account4	-2 		EatingOut	Drinks		BigChillHouse
+13/03/2017	Account2	-6 		Groceries			M&S SIMPLY FOOD-SS
+13/03/2017	Account2	-52 		Transport	Train		TRAINLINE.COM LTD	Newcastle2017
+13/03/2017	Account2	-200 		Internal			Account3
+13/03/2017	Account2	-25.123 		Fixed	Internet		VIRGIN MEDIA PYMTS
+13/03/2017	Account2	-5 		Shopping			BOOTS 1940
+13/03/2017	Account2	-8 		Transport	Uber		UBER GB MAR12 YQBF
+13/03/2017	Account2	-1 		EatingOut	Coffee		EST PRESSO 1968
+13/03/2017	Account3	-5 		EatingOut	Lunch		Haa		1
+13/03/2017	Account3	-13.32 		Shopping			Charity shop
+13/03/2017	Account3	-19 		Groceries			M&S SIMPLY FOOD-SS
+13/03/2017	Account4	-15 		EatingOut	Drinks		Pub
+13/03/2017	Account4	-19 		Sport	OneTime	Squash	Better
+13/03/2017	Account5	-263 		Transport	Flight	RYANAIR LTD AIRLINE DUBLIN	RYANAIR WEB GBP	Berlin2017
+13/03/2017	Account5	-4 		EatingOut	Breakfast	LE PAIN QUOTIDIEN LONDON	LE PAIN QUOTIDIEN
+13/03/2017	Account5	-7 		EatingOut	Coffee	Coffee	coffee
+13/03/2017	Account5	-1 		Groceries		TESCO STORES 5912 LONDON	TESCO STORES 5912
+13/03/2017	Account5	-7 		EatingOut	Lunch	MODERN JAPANESE LONDON	KMODERN JAPANESE
+13/03/2017	Account6	-12 		Fixed	Phone	GIFFGAFF.COM	GIFFGAFF.COM
+13/03/2017	Account7	-100 		Internal		MONZO CD 8417 	Account4
+13/03/2017	Account7	-100 		Internal		MONZO CD 8417 	Account4
+14/03/2017	Account3	-6 		EatingOut	Lunch		Wasabi
+14/03/2017	Account4	-40 		EatingOut	Lunch		ATM
+14/03/2017	Account5	-4 		Groceries		SAINSBURY'S SPRMRKTS LT LONDON	SAINSBURY'S SPRMRKTS LTD-SACAT LOC-SCO
+14/03/2017	Account6	-10 		Fixed	Phone		GIFFGAFF.COM
+14/03/2017	Account10		 300 	Other
+15/03/2017	Account3	-7 		EatingOut	Lunch		Chozen Noodle
+15/03/2017	Account3	-2 		EatingOut	Lunch		Wrapid
+15/03/2017	Account3	-5 		Groceries			Sainsbury's
+15/03/2017	Account4	-7 		EatingOut	Lunch		ChosenNoodle
+15/03/2017	Account5	-80 		Groceries		OCADO HERTFORDSHIRE	OCADO
+15/03/2017	Account5	-6 		Transport	TFL	TFL TRAVEL CHARGE TFL.GOV.UK/CP	TFL TRAVEL CHARGE
+16/03/2017	Account4	-3 		EatingOut	Drinks		BigChillHouse
+16/03/2017	Account4	-2 		EatingOut	Drinks		BigChillHouse

@@ -1,0 +1,6 @@
+id,created,amount,currency,local_amount,local_currency,category,emoji,description,address,notes,receipt
+tx_00009JxLunj6ZAGGHZae1p,2017-05-01 09:15:57 +0000,-12.09,GBP,-12.09,GBP,entertainment,🎶,Sandbag Ltd,Online transaction,
+tx_00009JzxjNEIvR1TUd562b,2017-05-02 15:29:05 +0000,-16.58,GBP,-16.58,GBP,general,💊,Boots,Somewhere in London E12 9AD,
+tx_00009K1UjqgqspNRFFFVqL,2017-05-03 09:13:40 +0000,-8.25,GBP,-8.25,GBP,shopping,📮,Post Office,"Kings Mall, London W6 0PZ",
+tx_00009K1VvXNKcZaAloFwFl,2017-05-03 09:26:58 +0000,-13.75,GBP,-13.75,GBP,shopping,🏡,Wilko,Hammersmith 4,
+tx_00009K1WVFbk9quPLz0Q0f,2017-05-03 09:33:26 +0000,-2.19,GBP,-2.19,GBP,groceries,🍏,Marks & Spencer,"27 King Street, London W6 9XW",

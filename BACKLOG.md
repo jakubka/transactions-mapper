@@ -1,5 +1,5 @@
 - [x] map Lloyds export csv format to our csv format
-- [ ] map Monzo export csv format to our csv format
+- [x] map Monzo export csv format to our csv format
 - [x] map TSB export csv format to our csv format
 - [ ] make it easier to import output csv file
 - [ ] prompt user for category

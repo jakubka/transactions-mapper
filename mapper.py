@@ -3,17 +3,13 @@ import datetime
 
 
 def read_bank_statement(file_name):
-    input = []
     with open(file_name, newline='') as f:
-        reader = csv.reader(f)
-        for row in reader:
-            input.append(row)
-    return input
+        return list(csv.reader(f))[1:]
 
 
 def map_lloyds_transactions(transactions, account_name):
     output = []
-    for input_row in transactions[1:]:
+    for input_row in transactions:
         credit = 0 if input_row[6] == '' else float(input_row[6])
         debit = 0 if input_row[5] == '' else float(input_row[5])
 
@@ -37,7 +33,7 @@ def map_lloyds_transactions(transactions, account_name):
 def map_monzo_transactions(transactions, account_name):
     output = []
 
-    for input_row in transactions[1:]:
+    for input_row in transactions:
         transaction_datetime = datetime.datetime.strptime(input_row[1], '%Y-%m-%d %H:%M:%S %z')
 
         output_row = [

@@ -1,14 +1,28 @@
 # transcations-mapper
 
-Requires Python 3.5
+Script which maps bank statement export files to a common format suitable to be imported to our excel spredsheet.
 
-```sh
-python mapper.py
-```
+## Features
 
-1. Read `lloyds.csv`
-2. Create `output.csv`
+- map Lloyds export csv format to our csv format
+- map Monzo export csv format to our csv format
+- map TSB export csv format to our csv format
 
-- if `lloyds.csv` does not exist, print an error
-- if `lloyds.csv` is in invalid format, print an error
-- if `output.csv` already exists, print an error
+## Prerequisities
+
+Requires Python 3.5 or greater.
+
+## Usage
+
+1. Clone the repo
+
+    `git clone git@github.com:jakubka/transcations-mapper.git`
+
+2. Save export files as `lloyds.csv`, `tsb.csv` and `monzo.csv`
+3. Run
+
+    ```sh
+    python mapper.py
+    ```
+
+4. Output will be written to `output.csv`

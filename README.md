@@ -26,3 +26,6 @@ Requires Python 3.5 or greater.
     ```
 
 4. Output will be written to `output.csv`
+5. Open new excel workbook and insert data
+6. Copy date to the main workbook (paste values)
+7. Fill categories and account names

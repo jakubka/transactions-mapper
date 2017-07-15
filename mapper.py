@@ -1,10 +1,17 @@
 import csv
 import datetime
+import os
 
 
 def read_bank_statement(file_name):
+    if not os.path.isfile(file_name):
+        print('INFO: {} file does not exist, ignoring it'.format(file_name))
+        return []
+
     with open(file_name, newline='') as f:
-        return list(csv.reader(f))[1:]
+        transactions = list(csv.reader(f))[1:]
+        print('INFO: loaded {} transactions from {}'.format(len(transactions), file_name))
+        return transactions
 
 
 def map_lloyds_transactions(transactions, account_name):
@@ -72,4 +79,9 @@ output_monzo = map_monzo_transactions(monzo_transactions, 'MonzoMaja')
 
 output = output_lloyds + output_tsb + output_monzo
 
-write_output(output)
+if len(output) == 0:
+    print('ERROR: no transactions found')
+else:
+    write_output(output)
+
+    print('INFO: written {} transactions to output.csv'.format(len(output)))

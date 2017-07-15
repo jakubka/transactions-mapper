@@ -1,10 +1,9 @@
 - [x] map Lloyds export csv format to our csv format
 - [x] map Monzo export csv format to our csv format
 - [x] map TSB export csv format to our csv format
+- [x] make it easier to import output csv file
+- [x] recognise category automatically based on vendor (manual)
 - [ ] move repo to majiaj
-- [ ] make it easier to import output csv file
 - [ ] prompt user for category
 - [ ] map Amex export Excel format to our csv format
-- [ ] automatically add transactions to our Excel
-- [x] recognise category automatically based on vendor (manual)
 - [ ] recognise category automatically based on previous transations (machine learning)

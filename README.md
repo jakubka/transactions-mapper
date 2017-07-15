@@ -18,7 +18,14 @@ Requires Python 3.5 or greater.
 
     `git clone git@github.com:jakubka/transcations-mapper.git`
 
-2. Save export files as `lloyds.csv`, `tsb.csv` and `monzo.csv`
+2. Save export files
+
+    - `lloyds_maja.csv` - will be mapped with LloydsMaja account name
+    - `lloyds_master.csv` - will be mapped with LloydsMaster account name
+    - `monzo_maja.csv` - will be mapped with MonzoMaja account name
+    - `monzo_jakub.csv` - will be mapped with MonzoJakub account name
+    - `tsb.csv` - will be mapped with TSBJakub account name
+
 3. Run
 
     ```sh

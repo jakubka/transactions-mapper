@@ -68,16 +68,22 @@ def write_output(output):
         writer.writerows(output)
 
 
-lloyds_transactions = read_bank_statement('lloyds.csv')
-output_lloyds = map_lloyds_transactions(lloyds_transactions, 'LloydsMaja')
+lloyds_maja_transactions = read_bank_statement('lloyds_maja.csv')
+output_lloyds_maja = map_lloyds_transactions(lloyds_maja_transactions, 'LloydsMaja')
+
+lloyds_master_transactions = read_bank_statement('lloyds_master.csv')
+output_lloyds_master = map_lloyds_transactions(lloyds_master_transactions, 'LloydsMaster')
 
 tsb_transactions = read_bank_statement('tsb.csv')
 output_tsb = map_lloyds_transactions(tsb_transactions, 'TSBJakub')
 
-monzo_transactions = read_bank_statement('monzo.csv')
-output_monzo = map_monzo_transactions(monzo_transactions, 'MonzoMaja')
+monzo_maja_transactions = read_bank_statement('monzo_maja.csv')
+output_monzo_maja = map_monzo_transactions(monzo_maja_transactions, 'MonzoMaja')
 
-output = output_lloyds + output_tsb + output_monzo
+monzo_jakub_transactions = read_bank_statement('monzo_jakub.csv')
+output_monzo_jakub = map_monzo_transactions(monzo_jakub_transactions, 'MonzoJakub')
+
+output = output_lloyds_maja + output_lloyds_master + output_tsb + output_monzo_maja + output_monzo_jakub
 
 if len(output) == 0:
     print('ERROR: no transactions found')

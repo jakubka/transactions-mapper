@@ -1,6 +1,7 @@
 import csv
 import datetime
 import os
+import re
 
 
 def read_bank_statement(file_name):
@@ -59,6 +60,38 @@ def map_monzo_transactions(transactions, account_name):
 
     return output
 
+merchant_to_category_mapping = [
+    ("tfl", ("Transport", "TFL")),
+    ("marks", ("Groceries", "")),
+    ("waitrose", ("Groceries", "")),
+    ("pret a manger", ("EatingOut", "")),
+    ("co-op", ("Groceries", "")),
+    ("ocado", ("Groceries", "")),
+    ("lookfantastic", ("Shopping", "Essentials")),
+    ("uber", ("Transport", "Taxi")),
+    ("treatwell", ("Bodycare", "")),
+    ("amazon", ("Shopping", "")),
+    ("sainsbury", ("Groceries", "")),
+    ("tesco", ("Groceries", "")),
+    ("interest", ("Income", "Interest")),
+]
+
+def get_category_from_merchant(merchant):
+    for merchant_regex, category in merchant_to_category_mapping:
+        if re.search(merchant_regex, merchant, re.IGNORECASE):
+            return category
+    return None      
+
+def fill_categories(mapped_transactions):
+    categories_filled_count = 0 
+    for transactions_row in mapped_transactions:
+        categories = get_category_from_merchant(transactions_row[7])
+        if categories is not None:
+            transactions_row[4] = categories[0]
+            transactions_row[5] = categories[1]
+            categories_filled_count += 1
+                
+    print("INFO: filled categories for {} transactions out of {}".format(categories_filled_count, len(mapped_transactions)))
 
 def write_output(output):
     with open('output.csv', 'w', newline='') as f:
@@ -83,11 +116,13 @@ output_monzo_maja = map_monzo_transactions(monzo_maja_transactions, 'MonzoMaja')
 monzo_jakub_transactions = read_bank_statement('monzo_jakub.csv')
 output_monzo_jakub = map_monzo_transactions(monzo_jakub_transactions, 'MonzoJakub')
 
-output = output_lloyds_maja + output_lloyds_master + output_tsb + output_monzo_maja + output_monzo_jakub
+mapped_transactions = output_lloyds_maja + output_lloyds_master + output_tsb + output_monzo_maja + output_monzo_jakub
 
-if len(output) == 0:
+fill_categories(mapped_transactions)
+
+if len(mapped_transactions) == 0:
     print('ERROR: no transactions found')
 else:
-    write_output(output)
+    write_output(mapped_transactions)
 
-    print('INFO: written {} transactions to output.csv'.format(len(output)))
+    print('INFO: written {} transactions to output.csv'.format(len(mapped_transactions)))

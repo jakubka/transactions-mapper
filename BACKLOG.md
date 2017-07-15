@@ -6,5 +6,5 @@
 - [ ] prompt user for category
 - [ ] map Amex export Excel format to our csv format
 - [ ] automatically add transactions to our Excel
-- [ ] recognise category automatically based on vendor (manual)
+- [x] recognise category automatically based on vendor (manual)
 - [ ] recognise category automatically based on previous transations (machine learning)

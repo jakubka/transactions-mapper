@@ -32,7 +32,8 @@ Requires Python 3.5 or greater.
     python mapper.py
     ```
 
-4. Output will be written to `output.csv`
-5. Open new excel workbook and insert data
-6. Copy date to the main workbook (paste values)
-7. Fill categories and account names
+    Output will be written to `output.csv`
+
+5. Open new excel workbook and insert data (Data -> From Text, Delimiter=TAB, set first column as DMY)
+6. Copy data to the main workbook (paste values)
+7. Fill categories

@@ -82,9 +82,18 @@ merchant_to_category_mapping = [
     ("H&M", ("Shopping", "Clothing")),
     ("DELIVEROOCOUK", ("EatingOut", "Restaurant")),
     ("audible", ("Education", "Book")),
-    ("CANCER RESEARCH", ("Charity", "")),
-
-
+    ("skyscanner", ("Income", "Salary")),
+    ("czechinvest", ("Income", "Salary")),
+    ("GIFFGAFF.COM", ("Fixed", "Phone")),
+    ("ITUNES.COM/BILL", ("Fixed", "Cloud")),
+    ("CLUB LLOYDS (FEE)|(WAIVED)", ("Other", "")),
+    ("LINDA MCCALLUM", ("Fixed", "Rent")),
+    ("Boots", ("Shopping", "Essentials")),
+    ("Better Gyms", ("Sport", "OneTime")),
+    ("Papaya", ("EatingOut", "Lunch")),
+    ("Bricklayers Arms", ("EatingOut", "Drinks")),
+    ("Tufnell Park Tavern", ("EatingOut", "Drinks")),
+    ("Barbican Pubs", ("EatingOut", "Drinks")),
 ]
 
 def get_category_from_merchant(merchant):

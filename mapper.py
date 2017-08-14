@@ -62,35 +62,46 @@ def map_monzo_transactions(transactions, account_name):
 
 merchant_to_category_mapping = [
     ("tfl", ("Transport", "TFL")),
-    ("marks", ("Groceries", "")),
+    ("(marks)|(m&s)", ("Groceries", "")),
     ("waitrose", ("Groceries", "")),
     ("pret a manger", ("EatingOut", "")),
     ("co-op", ("Groceries", "")),
     ("ocado", ("Groceries", "")),
     ("lookfantastic", ("Shopping", "Essentials")),
+    ("uber bv", ("EatingOut", "Restaurant")),  # UberEATS
     ("uber", ("Transport", "Taxi")),
     ("treatwell", ("Bodycare", "")),
     ("amazon", ("Shopping", "")),
     ("sainsbury", ("Groceries", "")),
     ("tesco", ("Groceries", "")),
     ("interest", ("Income", "Interest")),
+    ("leon", ("EatingOut", "Lunch")),
+    ("pod", ("EatingOut", "Lunch")),
+    ("MICROSOFT   \*ONEDR", ("Fixed", "Cloud")),
+    ("THE GYM LTD", ("Sport", "Gym")),
+    ("H&M", ("Shopping", "Clothing")),
+    ("DELIVEROOCOUK", ("EatingOut", "Restaurant")),
+    ("audible", ("Education", "Book")),
+    ("CANCER RESEARCH", ("Charity", "")),
+
+
 ]
 
 def get_category_from_merchant(merchant):
     for merchant_regex, category in merchant_to_category_mapping:
         if re.search(merchant_regex, merchant, re.IGNORECASE):
             return category
-    return None      
+    return None
 
 def fill_categories(mapped_transactions):
-    categories_filled_count = 0 
+    categories_filled_count = 0
     for transactions_row in mapped_transactions:
         categories = get_category_from_merchant(transactions_row[7])
         if categories is not None:
             transactions_row[4] = categories[0]
             transactions_row[5] = categories[1]
             categories_filled_count += 1
-                
+
     print("INFO: filled categories for {} transactions out of {}".format(categories_filled_count, len(mapped_transactions)))
 
 def write_output(output):

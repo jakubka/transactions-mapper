@@ -3,6 +3,7 @@
 - [x] map TSB export csv format to our csv format
 - [x] make it easier to import output csv file
 - [x] recognise category automatically based on vendor (manual)
+- [ ] match internal transactions based on current account and other things
 - [ ] move repo to majiaj
 - [ ] prompt user for category
 - [ ] map Amex export Excel format to our csv format

@@ -94,6 +94,9 @@ merchant_to_category_mapping = [
     ("Bricklayers Arms", ("EatingOut", "Drinks")),
     ("Tufnell Park Tavern", ("EatingOut", "Drinks")),
     ("Barbican Pubs", ("EatingOut", "Drinks")),
+    ("CYCLE HIRE", ("Transport", "CycleHire")),
+    ("GOOGLE STORAGE", ("Fixed", "Cloud")),
+
 ]
 
 def get_category_from_merchant(merchant):

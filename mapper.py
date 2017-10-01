@@ -60,6 +60,30 @@ def map_monzo_transactions(transactions, account_name):
 
     return output
 
+
+def map_amex_transactions(transactions):
+    output = []
+
+    for input_row in transactions:
+        transaction_datetime = datetime.datetime.strptime(input_row[0], '%d %b %Y')
+
+        output_row = [
+            transaction_datetime.strftime('%d/%m/%Y'),  # Date
+            'Amex',  # Account
+            float(input_row[3].replace('£', '')),  # Amount GBP
+            '',  # Amount CZK
+            '',  # Category
+            '',  # Sub-category
+            input_row[2],  # Note
+            input_row[2],  # Merchant
+            '',  # Holiday
+            '',  # Business
+        ]
+        output.append(output_row)
+
+    return output
+
+
 merchant_to_category_mapping = [
     ("tfl", ("Transport", "TFL")),
     ("(marks)|(m&s)", ("Groceries", "")),
@@ -96,14 +120,25 @@ merchant_to_category_mapping = [
     ("Barbican Pubs", ("EatingOut", "Drinks")),
     ("CYCLE HIRE", ("Transport", "CycleHire")),
     ("GOOGLE STORAGE", ("Fixed", "Cloud")),
+    ("YOU ME SUSHI", ("EatingOut", "Lunch")),
+    ("BIG FERNAND", ("EatingOut", "Lunch")),
+    ("SHAKE SHACK", ("EatingOut", "Lunch")),
+    ("RYANAIR", ("Transport", "Flight")),
+    ("BREWDOG", ("EatingOut", "Drinks")),
+    ("WASABI", ("EatingOut", "Lunch")),
+    ("PATTY AND BUN", ("EatingOut", "")),
+
+
 
 ]
+
 
 def get_category_from_merchant(merchant):
     for merchant_regex, category in merchant_to_category_mapping:
         if re.search(merchant_regex, merchant, re.IGNORECASE):
             return category
     return None
+
 
 def fill_categories(mapped_transactions):
     categories_filled_count = 0
@@ -114,7 +149,9 @@ def fill_categories(mapped_transactions):
             transactions_row[5] = categories[1]
             categories_filled_count += 1
 
-    print("INFO: filled categories for {} transactions out of {}".format(categories_filled_count, len(mapped_transactions)))
+    print("INFO: filled categories for {} transactions out of {}".format(
+        categories_filled_count, len(mapped_transactions)))
+
 
 def write_output(output):
     with open('output.csv', 'w', newline='') as f:
@@ -139,7 +176,11 @@ output_monzo_maja = map_monzo_transactions(monzo_maja_transactions, 'MonzoMaja')
 monzo_jakub_transactions = read_bank_statement('monzo_jakub.csv')
 output_monzo_jakub = map_monzo_transactions(monzo_jakub_transactions, 'MonzoJakub')
 
-mapped_transactions = output_lloyds_maja + output_lloyds_master + output_tsb + output_monzo_maja + output_monzo_jakub
+amex_transations = read_bank_statement('amex.csv')
+output_amex = map_amex_transactions(amex_transations)
+
+mapped_transactions = output_lloyds_maja + output_lloyds_master + \
+    output_tsb + output_monzo_maja + output_monzo_jakub + output_amex
 
 fill_categories(mapped_transactions)
 

@@ -2,17 +2,21 @@ import csv
 import datetime
 import os
 import re
+import glob
 
 
-def read_bank_statement(file_name):
-    if not os.path.isfile(file_name):
-        print('INFO: {} file does not exist, ignoring it'.format(file_name))
-        return []
+def read_bank_statement(file_name_pattern):
+    file_paths = glob.glob(file_name_pattern)
+    print('INFO: found {} files matching {} pattern: {}'
+          .format(len(file_paths), file_name_pattern, file_paths))
 
-    with open(file_name, newline='') as f:
-        transactions = list(csv.reader(f))[1:]
-        print('INFO: loaded {} transactions from {}'.format(len(transactions), file_name))
-        return transactions
+    def generate():
+        for file_path in file_paths:
+            with open(file_path, newline='') as f:
+                transactions = list(csv.reader(f))[1:]
+                print('INFO: loaded {} transactions from {}'.format(len(transactions), file_path))
+                yield from transactions
+    return list(generate())
 
 
 def map_lloyds_transactions(transactions, account_name):
@@ -161,22 +165,22 @@ def write_output(output):
         writer.writerows(output)
 
 
-lloyds_maja_transactions = read_bank_statement('lloyds_maja.csv')
+lloyds_maja_transactions = read_bank_statement('input/**/lloyds_maja.csv')
 output_lloyds_maja = map_lloyds_transactions(lloyds_maja_transactions, 'LloydsMaja')
 
-lloyds_master_transactions = read_bank_statement('lloyds_master.csv')
+lloyds_master_transactions = read_bank_statement('input/**/lloyds_master.csv')
 output_lloyds_master = map_lloyds_transactions(lloyds_master_transactions, 'LloydsMaster')
 
-tsb_transactions = read_bank_statement('tsb.csv')
+tsb_transactions = read_bank_statement('input/**/tsb.csv')
 output_tsb = map_lloyds_transactions(tsb_transactions, 'TSBJakub')
 
-monzo_maja_transactions = read_bank_statement('monzo_maja.csv')
+monzo_maja_transactions = read_bank_statement('input/**/monzo_maja.csv')
 output_monzo_maja = map_monzo_transactions(monzo_maja_transactions, 'MonzoMaja')
 
-monzo_jakub_transactions = read_bank_statement('monzo_jakub.csv')
+monzo_jakub_transactions = read_bank_statement('input/**/monzo_jakub.csv')
 output_monzo_jakub = map_monzo_transactions(monzo_jakub_transactions, 'MonzoJakub')
 
-amex_transations = read_bank_statement('amex.csv')
+amex_transations = read_bank_statement('input/**/amex.csv')
 output_amex = map_amex_transactions(amex_transations)
 
 mapped_transactions = output_lloyds_maja + output_lloyds_master + \

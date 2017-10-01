@@ -6,5 +6,5 @@
 - [ ] match internal transactions based on current account and other things
 - [ ] move repo to majiaj
 - [ ] prompt user for category
-- [ ] map Amex export Excel format to our csv format
+- [x] map Amex export Excel format to our csv format
 - [ ] recognise category automatically based on previous transations (machine learning)

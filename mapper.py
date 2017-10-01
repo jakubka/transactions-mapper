@@ -86,7 +86,7 @@ def map_amex_transactions(transactions):
         output_row = [
             transaction_datetime.strftime('%d/%m/%Y'),  # Date
             'Amex',  # Account
-            float(input_row[3].replace('£', '')),  # Amount GBP
+            -float(input_row[3].replace('£', '')),  # Amount GBP
             '',  # Amount CZK
             '',  # Category
             '',  # Sub-category
@@ -99,6 +99,9 @@ def map_amex_transactions(transactions):
 
     return output
 
+
+EATING_OUT_LUNCH = ("EatingOut", "Lunch")
+EATING_OUT_DRINKS = ("EatingOut", "Drinks")
 
 merchant_to_category_mapping = [
     ("NETFLIX.COM", ("Entertainment", "")),
@@ -116,9 +119,10 @@ merchant_to_category_mapping = [
     ("sainsbury", ("Groceries", "")),
     ("tesco", ("Groceries", "")),
     ("interest", ("Income", "Interest")),
-    ("leon", ("EatingOut", "Lunch")),
-    ("pod", ("EatingOut", "Lunch")),
+    ("leon", EATING_OUT_LUNCH),
+    ("pod", EATING_OUT_LUNCH),
     ("MICROSOFT   \*ONEDR", ("Fixed", "Cloud")),
+    ("PAYPAL\*PAYPAL\*MICROSOFT", ("Fixed", "Cloud")),
     ("THE GYM LTD", ("Sport", "Gym")),
     ("H&M", ("Shopping", "Clothing")),
     ("DELIVEROOCOUK", ("EatingOut", "Restaurant")),
@@ -131,19 +135,35 @@ merchant_to_category_mapping = [
     ("LINDA MCCALLUM", ("Fixed", "Rent")),
     ("Boots", ("Shopping", "Essentials")),
     ("Better Gyms", ("Sport", "OneTime")),
-    ("Papaya", ("EatingOut", "Lunch")),
+    ("Papaya", EATING_OUT_LUNCH),
     ("Bricklayers Arms", ("EatingOut", "Drinks")),
     ("Tufnell Park Tavern", ("EatingOut", "Drinks")),
     ("Barbican Pubs", ("EatingOut", "Drinks")),
     ("CYCLE HIRE", ("Transport", "CycleHire")),
     ("GOOGLE STORAGE", ("Fixed", "Cloud")),
-    ("YOU ME SUSHI", ("EatingOut", "Lunch")),
-    ("BIG FERNAND", ("EatingOut", "Lunch")),
-    ("SHAKE SHACK", ("EatingOut", "Lunch")),
+    ("YOU ME SUSHI", EATING_OUT_LUNCH),
+    ("BIG FERNAND", EATING_OUT_LUNCH),
+    ("SHAKE SHACK", EATING_OUT_LUNCH),
     ("RYANAIR", ("Transport", "Flight")),
     ("BREWDOG", ("EatingOut", "Drinks")),
-    ("WASABI", ("EatingOut", "Lunch")),
+    ("WASABI", EATING_OUT_LUNCH),
     ("PATTY AND BUN", ("EatingOut", "")),
+    ("COCO DI MAMA", EATING_OUT_LUNCH),
+    ("Kimchee To Go", EATING_OUT_LUNCH),
+    ("COCO DI MAMA", EATING_OUT_LUNCH),
+    ("DATAQUEST", ("Education", "Course")),
+    ("International Debit Card .* Fee", ("Other", "StupidFee")),
+    ("Cancer research", ("Charity", "")),
+    ("Greater Anglia", ("Transport", "Train")),
+    ("The Flintlock", EATING_OUT_DRINKS),
+    ("The Two Brewers", EATING_OUT_DRINKS),
+    ("The Marquis of Granby", EATING_OUT_DRINKS),
+    ("The Craft Beer Co", EATING_OUT_DRINKS),
+    ("COLLEGE ARMS", EATING_OUT_DRINKS),
+    ("VIRGIN MEDIA", ("Fixed", "Internet")),
+    ("T K MAXX", ("Shopping", "Clothing")),
+    ("ZARA", ("Shopping", "Clothing")),
+    ("Wok to Walk", EATING_OUT_LUNCH),
 ]
 
 
@@ -176,20 +196,32 @@ def fill_internal_transaction_details(transactions_row):
             'MONZO' in transactions_row[OUTPUT_COLUMN_MERCHANT]
 
     if is_monzo_jakub_topup():
-        transactions_row[OUTPUT_COLUMN_CATEGORY] = 'internal'
+        transactions_row[OUTPUT_COLUMN_CATEGORY] = 'Internal'
         transactions_row[OUTPUT_COLUMN_MERCHANT] = 'LloydsMaster'
+        transactions_row[OUTPUT_COLUMN_NOTE] = ''
         return True
     if is_lloyds_to_monzo_jakub():
-        transactions_row[OUTPUT_COLUMN_CATEGORY] = 'internal'
+        transactions_row[OUTPUT_COLUMN_CATEGORY] = 'Internal'
         transactions_row[OUTPUT_COLUMN_MERCHANT] = 'MonzoJakub'
+        transactions_row[OUTPUT_COLUMN_NOTE] = ''
         return True
     elif is_monzo_maja_topup():
-        transactions_row[OUTPUT_COLUMN_CATEGORY] = 'internal'
+        transactions_row[OUTPUT_COLUMN_CATEGORY] = 'Internal'
         transactions_row[OUTPUT_COLUMN_MERCHANT] = 'LloydsMaja'
+        transactions_row[OUTPUT_COLUMN_NOTE] = ''
         return True
     if is_lloyds_to_monzo_maja():
-        transactions_row[OUTPUT_COLUMN_CATEGORY] = 'internal'
+        transactions_row[OUTPUT_COLUMN_CATEGORY] = 'Internal'
         transactions_row[OUTPUT_COLUMN_MERCHANT] = 'MonzoMaja'
+        transactions_row[OUTPUT_COLUMN_NOTE] = ''
+        return True
+
+    #TODO: lloydsmaster -> lloydsmaja 1500 kazdy miesionc
+    # lloydsmaja -> lloyds maja monthly saver 400 kazdy miesionc
+    # OUTPUT:
+    #   02/06/17	LloydsMaja	-£400 		Internal	Investment		LloydsMonthlySaverMaja
+    #   03/07/17	LloydsMonthlySaverMaja	 £400 		Investment			LloydsMaja
+    # Amex payment
 
     return False
 

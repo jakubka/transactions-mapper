@@ -48,6 +48,9 @@ Requires Python 3.5 or greater.
 
     Output will be written to `output.csv`
 
-5. Open new excel workbook and insert data (Data -> From Text, Delimiter=TAB, set first column as DMY)
+5. Open new excel workbook and insert data from `output.csv`
+    1. Data -> From Text
+    2. Set Delimiter=TAB
+    3. Set first column as DMY
 6. Copy data to the main workbook (paste values)
 7. Fill categories

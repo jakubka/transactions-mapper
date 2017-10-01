@@ -4,6 +4,18 @@ import os
 import re
 import glob
 
+OUTPUT_COLUMN_DATE = 0
+OUTPUT_COLUMN_ACCOUNT_NAME = 1
+OUTPUT_COLUMN_AMOUNT_GBP = 2
+OUTPUT_COLUMN_AMOUNT_CZK = 3
+OUTPUT_COLUMN_CATEGORY = 4
+OUTPUT_COLUMN_SUB_CATEGORY = 5
+OUTPUT_COLUMN_NOTE = 6
+OUTPUT_COLUMN_MERCHANT = 7
+OUTPUT_COLUMN_HOLIDAY = 8
+OUTPUT_COLUMN_HOLIDAY = 9
+OUTPUT_COLUMN_BUSINESS = 10
+
 
 def read_bank_statement(file_name_pattern):
     file_paths = glob.glob(file_name_pattern)
@@ -89,6 +101,7 @@ def map_amex_transactions(transactions):
 
 
 merchant_to_category_mapping = [
+    ("NETFLIX.COM", ("Entertainment", "")),
     ("tfl", ("Transport", "TFL")),
     ("(marks)|(m&s)", ("Groceries", "")),
     ("waitrose", ("Groceries", "")),
@@ -131,9 +144,6 @@ merchant_to_category_mapping = [
     ("BREWDOG", ("EatingOut", "Drinks")),
     ("WASABI", ("EatingOut", "Lunch")),
     ("PATTY AND BUN", ("EatingOut", "")),
-
-
-
 ]
 
 
@@ -144,14 +154,58 @@ def get_category_from_merchant(merchant):
     return None
 
 
+def fill_internal_transaction_details(transactions_row):
+    def is_monzo_jakub_topup():
+        return transactions_row[OUTPUT_COLUMN_ACCOUNT_NAME] == 'MonzoJakub' and \
+            transactions_row[OUTPUT_COLUMN_AMOUNT_GBP] >= 100 and \
+            transactions_row[OUTPUT_COLUMN_MERCHANT] == ''
+
+    def is_lloyds_to_monzo_jakub():
+        return transactions_row[OUTPUT_COLUMN_ACCOUNT_NAME] == 'LloydsMaster' and \
+            transactions_row[OUTPUT_COLUMN_AMOUNT_GBP] <= -100 and \
+            'MONZO' in transactions_row[OUTPUT_COLUMN_MERCHANT]
+
+    def is_monzo_maja_topup():
+        return transactions_row[OUTPUT_COLUMN_ACCOUNT_NAME] == 'MonzoMaja' and \
+            transactions_row[OUTPUT_COLUMN_AMOUNT_GBP] >= 100 and \
+            transactions_row[OUTPUT_COLUMN_MERCHANT] == ''
+
+    def is_lloyds_to_monzo_maja():
+        return transactions_row[OUTPUT_COLUMN_ACCOUNT_NAME] == 'LloydsMaja' and \
+            transactions_row[OUTPUT_COLUMN_AMOUNT_GBP] <= -100 and \
+            'MONZO' in transactions_row[OUTPUT_COLUMN_MERCHANT]
+
+    if is_monzo_jakub_topup():
+        transactions_row[OUTPUT_COLUMN_CATEGORY] = 'internal'
+        transactions_row[OUTPUT_COLUMN_MERCHANT] = 'LloydsMaster'
+        return True
+    if is_lloyds_to_monzo_jakub():
+        transactions_row[OUTPUT_COLUMN_CATEGORY] = 'internal'
+        transactions_row[OUTPUT_COLUMN_MERCHANT] = 'MonzoJakub'
+        return True
+    elif is_monzo_maja_topup():
+        transactions_row[OUTPUT_COLUMN_CATEGORY] = 'internal'
+        transactions_row[OUTPUT_COLUMN_MERCHANT] = 'LloydsMaja'
+        return True
+    if is_lloyds_to_monzo_maja():
+        transactions_row[OUTPUT_COLUMN_CATEGORY] = 'internal'
+        transactions_row[OUTPUT_COLUMN_MERCHANT] = 'MonzoMaja'
+
+    return False
+
+
 def fill_categories(mapped_transactions):
     categories_filled_count = 0
     for transactions_row in mapped_transactions:
         categories = get_category_from_merchant(transactions_row[7])
         if categories is not None:
-            transactions_row[4] = categories[0]
-            transactions_row[5] = categories[1]
+            transactions_row[OUTPUT_COLUMN_CATEGORY] = categories[0]
+            transactions_row[OUTPUT_COLUMN_SUB_CATEGORY] = categories[1]
             categories_filled_count += 1
+        else:
+            filled_internal = fill_internal_transaction_details(transactions_row)
+            if filled_internal:
+                categories_filled_count += 1
 
     print("INFO: filled categories for {} transactions out of {}".format(
         categories_filled_count, len(mapped_transactions)))
@@ -187,6 +241,13 @@ mapped_transactions = output_lloyds_maja + output_lloyds_master + \
     output_tsb + output_monzo_maja + output_monzo_jakub + output_amex
 
 fill_categories(mapped_transactions)
+
+
+def get_key(transaction):
+    return datetime.datetime.strptime(transaction[OUTPUT_COLUMN_DATE], '%d/%m/%Y')
+
+
+mapped_transactions.sort(key=get_key)
 
 if len(mapped_transactions) == 0:
     print('ERROR: no transactions found')

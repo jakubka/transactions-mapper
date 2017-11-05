@@ -3,8 +3,15 @@
 - [x] map TSB export csv format to our csv format
 - [x] make it easier to import output csv file
 - [x] recognise category automatically based on vendor (manual)
-- [ ] match internal transactions based on current account and other things
+- [x] match internal transactions based on current account and other things
+- [ ] match more internal transactions
+- [ ] create transactions for pension payments
+- [ ] recognise Amex excel (or at least strip not needed chars from the beginning of the csv)
+- [ ] print account balance for Lloyds
+- [ ] match KB csv
+- [ ] match Equa csv
 - [ ] move repo to majiaj
 - [ ] prompt user for category
+- [ ] prompt for holiday?
 - [x] map Amex export Excel format to our csv format
 - [ ] recognise category automatically based on previous transations (machine learning)
